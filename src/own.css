@@ -36,16 +36,27 @@
   background-color: darkred;
   padding: 8px 16px;
   border-radius: 16px;
-  position: absolute;
-  font-size: 1.5rem;
-  bottom: 10%;
-  right: 38%;
-
+  width: max-content;
+  font-size: 1rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
   &:hover {
     background-color: rgb(102, 0, 0);
   }
 }
-
+.secondary-button {
+  background-color: white;
+  padding: 8px 16px;
+  border-radius: 16px;
+  width: max-content;
+  font-size: 1rem;
+  border: 1px solid darkred;
+  color: darkred;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  &:hover {
+    border: 1px solid rgb(102, 0, 0);
+    color: rgb(102, 0, 0);
+  }
+}
 .buttonNext {
   display: flex;
   background-color: darkred;
@@ -67,6 +78,26 @@
     background-color: rgb(102, 0, 0);
   }
 }
+.image-with-skills-wrapper {
+  display: flex;
+  justify-content: flex-start; /* Align image to the left */
+  align-items: center;
+  width: max-content; /* Ensure the wrapper takes full width */
+  height: max-content;
+  overflow: hidden;
+}
+
+.skills-wrapper {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+  padding: 1rem;
+  width: 20%; /* Adjust width as needed */
+  margin-left: 1rem; /* Space between image and skills list */
+  border-radius: 1rem;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #e0bbe4, #add8e6);
+}
 
 .image-wrapper {
   display: flex;
@@ -81,7 +112,7 @@
   opacity: 0; /* Start as fully transparent */
   transform: translateX(-100%); /* Start position off the left side */
   animation: fadeInFromLeft 2s forwards; /* Adjust the duration as needed */
-  width: 100%; /* Ensure the image covers the container */
+  width: max-content; /* Ensure the image covers the container */
   height: auto; /* Maintain aspect ratio */
 }
 

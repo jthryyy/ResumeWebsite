@@ -1,7 +1,8 @@
 import * as React from "react";
-import "../own.css";
 import { TypewriterEffect } from "./utils";
 import type { WorkType } from ".";
+
+import "../own.css";
 
 interface DialogueEntry {
   character: Character;
@@ -40,12 +41,47 @@ const dialogues: DialogueEntry[] = [
   },
   {
     character: "jet",
-    text: "Wow, that's awesome! It just so happens that I'm a software engineer. I mainly do frontend and specialize in React, Javascript, Typescript, and Next.js.",
+    text: "Wow, that's awesome! It just so happens that I'm a software engineer. I work primarily on front-end development and specialize in React, Javascript, Typescript, and Next.js.",
   },
   {
     character: "jet",
     text: "Well I gotta run, I have a dog at home named Hopia who I have to tend to. There is a community game night at the Biergarten tonight. You should come! It's great to meet new people that way.",
   },
+];
+
+const skills = [
+  "React",
+  "Javascript",
+  "Typescript",
+  "Next.js",
+  "Redux",
+  "Vite/Vitest",
+  "HTML",
+  "CSS",
+  "Python",
+  "Jest",
+  "Cypress",
+  "Unit testing",
+  "e2e & integration testing",
+  "Git/Github",
+  "Github Actions",
+  "Styled-components",
+  "graphQL",
+  "React-query",
+  "JQuery",
+  "SQL",
+  "Storybook",
+  "AWS SDK",
+  "Webpack",
+  "Bootstrap",
+  "Responsive design",
+  "Designer systems",
+  "React-hook-form",
+  "Figma",
+  "Product Management",
+  "Jira",
+  "Confluence",
+  "Scrum",
 ];
 
 interface CoffeeProps {
@@ -59,7 +95,6 @@ interface CoffeeProps {
 export const Coffee = (props: CoffeeProps): JSX.Element => {
   const { onClick, setName, name, setWork, setBar } = props;
   const [index, setIndex] = React.useState<number>(0);
-  const [isDone, setIsDone] = React.useState<boolean>(false);
   const [nameModal, setNameModal] = React.useState<boolean>(false);
   const [workModal, setWorkModal] = React.useState<boolean>(false);
   const [barModal, setBarModal] = React.useState<boolean>(false);
@@ -76,7 +111,6 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
       setBarModal(true);
     } else if (nextIndex < dialogues.length) {
       setIndex(nextIndex);
-      setIsDone(false);
     } else {
       onClick();
     }
@@ -116,6 +150,36 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
               alt="Description"
               className="fade-in-image"
             />
+            {index === 9 ? (
+              <div className="skills-wrapper">
+                <div style={{ fontWeight: 700 }}>Skills</div>
+                <ul
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    listStyle: "none", // Removes bullets from list items
+                    padding: 0, // Removes default padding from the ul
+                    margin: 0, // Removes default margin from the ul
+                    gridGap: "8px", // Space between the list items
+                  }}
+                >
+                  {skills.map((skill) => (
+                    <li
+                      key={skill}
+                      style={{
+                        color: "white",
+                        flex: "0 1 auto",
+                        backgroundColor: "darkred",
+                        padding: "0.5rem",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         ) : null}
         <div
@@ -125,6 +189,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             padding: "1rem",
             borderRadius: "8px",
             marginBottom: "1rem",
+            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
             background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
             display: "flex",
             flexDirection: "column",
@@ -219,12 +284,10 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           {!nameModal && !workModal && !barModal ? (
             <>
               <div style={{ display: "flex", gridGap: "2px" }}>
-                <div style={{ fontWeight: 700 }}>{`${
-                  character === "you" && name !== ""
-                    ? name
-                    : character.toUpperCase()
-                }: `}</div>
-                <TypewriterEffect text={text} setIsDone={setIsDone} />
+                <div
+                  style={{ fontWeight: 700 }}
+                >{`${character.toUpperCase()}: `}</div>
+                <TypewriterEffect text={text} />
               </div>
               <button className="buttonNext" onClick={handleNextClick}>
                 Next

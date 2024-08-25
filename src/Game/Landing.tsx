@@ -47,9 +47,22 @@ export const Landing = (props: LandingProps): JSX.Element => {
       <div className="container">
         <div className="first">Win a chance to meet my dog, Hopia!</div>
       </div>
-      <button className="button" onClick={onClick}>
-        Play
-      </button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "2%",
+          textAlign: "center",
+          gridGap: "1rem",
+        }}
+      >
+        <button className="secondary-button" onClick={onClick}>
+          Skip game and go to resume
+        </button>
+        <button className="button" onClick={onClick}>
+          Play
+        </button>
+      </div>
     </div>
   );
 };

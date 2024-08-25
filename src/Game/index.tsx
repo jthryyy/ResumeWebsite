@@ -1,18 +1,33 @@
 import * as React from "react";
 import { Landing } from "./Landing";
 import { Coffee } from "./Coffee";
+import { Bar } from "./Bar";
+import { Final } from "./Final";
+import { Loser } from "./Lose";
 
 type PageType = "landing" | "coffee" | "bar" | "final";
 export type WorkType = "recruiter" | "swe" | "other";
 
-export function Wizard(): JSX.Element {
+interface WizardProps {
+  onClick: (win: boolean) => void;
+}
+export function Wizard(props: WizardProps): JSX.Element {
+  const { onClick } = props;
   const [page, setPage] = React.useState<PageType>("landing");
   const [name, setName] = React.useState<string>("");
   const [work, setWork] = React.useState<WorkType | null>(null);
   const [bar, setBar] = React.useState<"yes" | "no" | null>(null);
+  const [seat, setGrabSeat] = React.useState<"yes" | "no" | null>(null);
+  const [contact, setContact] = React.useState<"yes" | "no" | null>(null);
 
-  if (bar === "no") {
-    return <div>you lose</div>;
+  if (bar === "no" || seat === "no") {
+    return (
+      <Loser
+        onClick={() => {
+          onClick(false);
+        }}
+      />
+    );
   }
 
   if (page === "landing") {
@@ -49,8 +64,23 @@ export function Wizard(): JSX.Element {
       />
     );
   } else if (page === "bar") {
-    return <div>bar</div>;
+    return (
+      <Bar
+        name={name}
+        setContactInfo={setContact}
+        setGrabSeat={setGrabSeat}
+        onClick={() => {
+          setPage("final");
+        }}
+      />
+    );
   } else {
-    return <div>finale</div>;
+    return (
+      <Final
+        onClick={() => {
+          onClick(true);
+        }}
+      />
+    );
   }
 }
