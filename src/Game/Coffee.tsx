@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
+import { useAudio } from "../AudioContext";
 import type { WorkType } from ".";
 
 import "../own.css";
@@ -95,14 +96,26 @@ interface CoffeeProps {
 
 export const Coffee = (props: CoffeeProps): JSX.Element => {
   const { onClick, setName, name, setWork, setBar } = props;
+  const { isMuted, toggleAudio, audioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const [nameModal, setNameModal] = React.useState<boolean>(false);
   const [workModal, setWorkModal] = React.useState<boolean>(false);
   const [barModal, setBarModal] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+  }, [isMuted]);
+
   const currentDialogue = dialogues[index];
   const { character, text } = currentDialogue;
 
-  const handleNextClick = () => {
+  const handleNextClick = (): void => {
     const nextIndex = index + 1;
     if (index === 7) {
       setNameModal(true);
@@ -117,23 +130,27 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
     }
   };
 
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
-  const [isMuted, setIsMuted] = React.useState<boolean>(false);
-
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.play();
-        setIsMuted(false);
-      } else {
-        audioRef.current.pause();
-        setIsMuted(true);
-      }
+  const handleEnter = (): void => {
+    if (nameModal) {
+      setIndex(index + 1);
+      setNameModal(false);
+    } else if (workModal) {
+      setWorkModal(false);
+      setWork("swe");
+      setIndex(index + 1);
+    } else if (barModal) {
+      setBarModal(false);
+      setBar("yes");
+      onClick();
     }
   };
 
   return (
-    <HandleEnter onEnter={handleNextClick}>
+    <HandleEnter
+      onEnter={
+        !nameModal && !workModal && !barModal ? handleNextClick : handleEnter
+      }
+    >
       <div
         style={{
           backgroundImage: "url(/assets/BackgroundCoffee.jpg)",

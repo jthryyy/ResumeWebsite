@@ -39,7 +39,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
   const currentDialogue = dialogues[index];
   const { character, text } = currentDialogue;
 
-  const handleNextClick = () => {
+  const handleNextClick = (): void => {
     const nextIndex = index + 1;
     if (nextIndex < dialogues.length) {
       setIndex(nextIndex);

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
+import { useAudio } from "../AudioContext";
 
 import "../own.css";
 
@@ -75,6 +76,7 @@ interface BarProps {
 
 export const Bar = (props: BarProps): JSX.Element => {
   const { onClick, name, setGrabSeat, setContactInfo } = props;
+  const { isMuted, toggleAudio, audioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const [grabSeatModal, setGrabSeatModal] = React.useState<boolean>(false);
   const [scienceModal, setSkipScienceModal] = React.useState<boolean>(false);
@@ -82,7 +84,17 @@ export const Bar = (props: BarProps): JSX.Element => {
   const currentDialogue = dialogues[index];
   const { character, text } = currentDialogue;
 
-  const handleNextClick = () => {
+  React.useEffect(() => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+  }, [isMuted]);
+
+  const handleNextClick = (): void => {
     const nextIndex = index + 1;
     if (index === 1) {
       setGrabSeatModal(true);
@@ -97,23 +109,29 @@ export const Bar = (props: BarProps): JSX.Element => {
     }
   };
 
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
-  const [isMuted, setIsMuted] = React.useState<boolean>(false);
-
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.play();
-        setIsMuted(false);
-      } else {
-        audioRef.current.pause();
-        setIsMuted(true);
-      }
+  const handleEnter = (): void => {
+    if (grabSeatModal) {
+      setGrabSeatModal(false);
+      setGrabSeat("yes");
+      setIndex(index + 1);
+    } else if (scienceModal) {
+      setSkipScienceModal(false);
+      setIndex(index + 4);
+    } else if (contactModal) {
+      setContactModal(false);
+      setContactInfo("yes");
+      setIndex(index + 1);
     }
   };
 
   return (
-    <HandleEnter onEnter={handleNextClick}>
+    <HandleEnter
+      onEnter={
+        !grabSeatModal && !scienceModal && !contactModal
+          ? handleNextClick
+          : handleEnter
+      }
+    >
       <div
         style={{
           backgroundImage: "url(/assets/biergartenBackground.jpg)",
