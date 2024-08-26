@@ -1,5 +1,6 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
+import { HandleEnter } from "./Components/HandleEnter";
 import "../own.css";
 
 interface DialogueEntry {
@@ -48,9 +49,12 @@ export const Final = (props: FinaleProps): JSX.Element => {
   };
 
   return (
-    <>
+    <HandleEnter onEnter={handleNextClick}>
       <div
         style={{
+          backgroundImage: "url(/assets/finalBackground.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           width: "100vw",
           height: "100vh",
           display: "flex",
@@ -81,7 +85,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
         <div
           style={{
             width: "60vw",
-            height: "max-content",
+            height: "15vh",
             padding: "1rem",
             borderRadius: "8px",
             boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
@@ -104,6 +108,6 @@ export const Final = (props: FinaleProps): JSX.Element => {
           </button>
         </div>
       </div>
-    </>
+    </HandleEnter>
   );
 };

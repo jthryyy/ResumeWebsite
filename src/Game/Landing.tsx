@@ -3,9 +3,10 @@ import "../own.css";
 
 interface LandingProps {
   onClick: () => void;
+  earlyQuit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const Landing = (props: LandingProps): JSX.Element => {
-  const { onClick } = props;
+  const { onClick, earlyQuit } = props;
 
   return (
     <div>
@@ -56,7 +57,12 @@ export const Landing = (props: LandingProps): JSX.Element => {
           gridGap: "1rem",
         }}
       >
-        <button className="secondary-button" onClick={onClick}>
+        <button
+          className="secondary-button"
+          onClick={() => {
+            earlyQuit(true);
+          }}
+        >
           Skip game and go to resume
         </button>
         <button className="button" onClick={onClick}>

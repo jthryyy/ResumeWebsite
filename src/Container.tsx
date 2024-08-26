@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Wizard } from "./Game";
+import { Resume } from "./Resume";
 
 export function Container(): JSX.Element {
   const [page, setPage] = React.useState<"game" | "resume">("game");
   const [win, setWin] = React.useState<boolean>(false);
-  console.log("if", win, "is true then hopia shows up on the resume");
+
   return page === "game" ? (
     <Wizard
       onClick={(value) => {
@@ -13,6 +14,11 @@ export function Container(): JSX.Element {
       }}
     />
   ) : (
-    <div>resume</div>
+    <Resume
+      isWin={win}
+      goBack={() => {
+        setPage("game");
+      }}
+    />
   );
 }

@@ -17,10 +17,11 @@ export function Wizard(props: WizardProps): JSX.Element {
   const [name, setName] = React.useState<string>("");
   const [work, setWork] = React.useState<WorkType | null>(null);
   const [bar, setBar] = React.useState<"yes" | "no" | null>(null);
+  const [earlyQuit, setEarlyQuit] = React.useState<boolean>(false);
   const [seat, setGrabSeat] = React.useState<"yes" | "no" | null>(null);
   const [contact, setContact] = React.useState<"yes" | "no" | null>(null);
 
-  if (bar === "no" || seat === "no") {
+  if (earlyQuit || bar === "no" || seat === "no" || contact === "no") {
     return (
       <Loser
         onClick={() => {
@@ -45,6 +46,7 @@ export function Wizard(props: WizardProps): JSX.Element {
         }}
       >
         <Landing
+          earlyQuit={setEarlyQuit}
           onClick={() => {
             setPage("coffee");
           }}

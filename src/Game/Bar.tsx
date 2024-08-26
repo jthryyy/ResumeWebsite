@@ -1,5 +1,7 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
+import { HandleEnter } from "./Components/HandleEnter";
+
 import "../own.css";
 
 interface DialogueEntry {
@@ -12,7 +14,7 @@ type Character = "narrator" | "you" | "jet" | "len";
 const dialogues: DialogueEntry[] = [
   {
     character: "narrator",
-    text: "With a gin & tonic in hand, you scout the room. There are quite a few people.",
+    text: "With a gin & tonic in hand, you scout the room.",
   },
   {
     character: "jet",
@@ -95,144 +97,246 @@ export const Bar = (props: BarProps): JSX.Element => {
     }
   };
 
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const [isMuted, setIsMuted] = React.useState<boolean>(false);
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play();
+        setIsMuted(false);
+      } else {
+        audioRef.current.pause();
+        setIsMuted(true);
+      }
+    }
+  };
+
   return (
-    <>
-      <button
-        style={{
-          padding: "1rem",
-          display: "flex",
-          justifyContent: "end",
-          width: "100vw",
-        }}
-        onClick={() => {
-          onClick();
-          setGrabSeat("no");
-        }}
-      >
-        Skip
-      </button>
+    <HandleEnter onEnter={handleNextClick}>
       <div
         style={{
+          backgroundImage: "url(/assets/biergartenBackground.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "100vh",
           width: "100vw",
-          height: "calc(100vh - 56px)",
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "center",
           fontFamily: "monospace",
-          flexDirection: "column",
         }}
       >
-        {character === "jet" ? (
-          <div className="image-wrapper">
-            <img
-              src="/assets/avatarBar.png"
-              alt="Description"
-              className="fade-in-image"
-            />
-          </div>
-        ) : null}
         <div
           style={{
-            width: "60vw",
-            height: "max-content",
-            padding: "1rem",
-            borderRadius: "8px",
-            marginBottom: "1rem",
-            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
-            background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
             display: "flex",
-            flexDirection: "column",
+            padding: "1rem",
+            justifyContent: "end",
+            width: "100vw",
             gridGap: "8px",
-            justifyContent: "space-between",
           }}
         >
-          {grabSeatModal ? (
-            <>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setGrabSeatModal(false);
-                  setGrabSeat("yes");
-                  setIndex(index + 1);
-                }}
-              >
-                Yes, I'd love to grab a seat
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setGrabSeatModal(false);
-                  setGrabSeat("no");
-                  setIndex(index + 1);
-                }}
-              >
-                No, that's okay
-              </button>
-            </>
-          ) : null}
-          {scienceModal ? (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setSkipScienceModal(false);
-                  setIndex(index + 4);
-                }}
-              >
-                Sorry, I don't have much time
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setSkipScienceModal(false);
-                  setIndex(index + 1);
-                }}
-              >
-                Yes, I'd love to hear about your science background!
-              </button>
+          <button
+            className="backButton"
+            onClick={() => {
+              onClick();
+              setGrabSeat("no");
+            }}
+          >
+            Skip
+          </button>
+          <div style={{ color: "white" }}>|</div>
+          <div className="backButton">
+            <audio ref={audioRef} src="/assets/Bach2.mp3" autoPlay loop />
+            <div
+              onClick={toggleAudio}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              {isMuted ? "Audio" : "Mute"}
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            width: "100vw",
+            height: "calc(100vh - 56px)",
+            display: "flex",
+            justifyContent: "end",
+            alignItems: "center",
+            fontFamily: "monospace",
+            flexDirection: "column",
+          }}
+        >
+          {character === "jet" ? (
+            <div className="image-wrapper">
+              <img
+                src="/assets/avatarBar.png"
+                alt="Description"
+                className="fade-in-image"
+              />
+              {index === 12 ? (
+                <div className="skills-wrapper" style={{ overflow: "scroll" }}>
+                  <div style={{ fontWeight: 700, color: "black" }}>
+                    Experiences
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      padding: "8px",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    Managed, as a PM and technical lead, the end-to-end
+                    development, architecture and successful software launches
+                    (versions 7.0.0, 8.0.0, 8.1.0) of{" "}
+                    <a
+                      href={"https://designer.opentrons.com/"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link"
+                    >
+                      Protocol Designer
+                    </a>
+                    , a visual protocol creation tool that streamlines the
+                    workflow for all customers.
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      padding: "8px",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    Lead the end-to-end development of{" "}
+                    <a
+                      href={"https://labware.opentrons.com/"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link"
+                    >
+                      Labware Library
+                    </a>{" "}
+                    v3.0.0, a web application used by customers spanning over 40
+                    countries to access verified labware.
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: "white",
+                      padding: "8px",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    Spearheaded the development and revitalization of the
+                    next-generation Opentrons Run app and touchscreen
+                    application, ensuring customer adoption in 90% of the top
+                    research universities.
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : null}
-          {contactModal ? (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setContactModal(false);
-                  setContactInfo("yes");
-                  setIndex(index + 1);
-                }}
-              >
-                Ask for contact info
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setContactModal(false);
-                  setContactInfo("no");
-                  setIndex(index + 1);
-                }}
-              >
-                Get up and leave
-              </button>
-            </div>
-          ) : null}
-          {!contactModal && !scienceModal && !grabSeatModal ? (
-            <>
-              <div style={{ display: "flex", gridGap: "2px" }}>
-                <div style={{ fontWeight: 700 }}>{`${
-                  character === "you" && name !== ""
-                    ? name.toUpperCase()
-                    : character.toUpperCase()
-                }: `}</div>
-                <TypewriterEffect text={text} />
+          <div
+            style={{
+              width: "60vw",
+              height: "15vh",
+              padding: "1rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
+              background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
+              display: "flex",
+              flexDirection: "column",
+              gridGap: "8px",
+              justifyContent: "space-between",
+            }}
+          >
+            {grabSeatModal ? (
+              <>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setGrabSeatModal(false);
+                    setGrabSeat("yes");
+                    setIndex(index + 1);
+                  }}
+                >
+                  Yes, I'd love to grab a seat
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setGrabSeatModal(false);
+                    setGrabSeat("no");
+                    onClick();
+                  }}
+                >
+                  No, that's okay
+                </button>
+              </>
+            ) : null}
+            {scienceModal ? (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setSkipScienceModal(false);
+                    setIndex(index + 4);
+                  }}
+                >
+                  Sorry, I don't have much time
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setSkipScienceModal(false);
+                    setIndex(index + 1);
+                  }}
+                >
+                  Yes, I'd love to hear about your science background!
+                </button>
               </div>
-              <button className="buttonNext" onClick={handleNextClick}>
-                Next
-              </button>
-            </>
-          ) : null}
+            ) : null}
+            {contactModal ? (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setContactModal(false);
+                    setContactInfo("yes");
+                    setIndex(index + 1);
+                  }}
+                >
+                  Ask for Jet's contact info
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setContactModal(false);
+                    setContactInfo("no");
+                    onClick();
+                  }}
+                >
+                  Get up and leave
+                </button>
+              </div>
+            ) : null}
+            {!contactModal && !scienceModal && !grabSeatModal ? (
+              <>
+                <div style={{ display: "flex", gridGap: "2px" }}>
+                  <div style={{ fontWeight: 700 }}>{`${
+                    character === "you" && name !== ""
+                      ? name.toUpperCase()
+                      : character.toUpperCase()
+                  }: `}</div>
+                  <TypewriterEffect text={text} />
+                </div>
+                <button className="buttonNext" onClick={handleNextClick}>
+                  Next
+                </button>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
-    </>
+    </HandleEnter>
   );
 };

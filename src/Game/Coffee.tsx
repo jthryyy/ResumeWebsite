@@ -1,5 +1,6 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
+import { HandleEnter } from "./Components/HandleEnter";
 import type { WorkType } from ".";
 
 import "../own.css";
@@ -16,13 +17,13 @@ const dialogues: DialogueEntry[] = [
     character: "narrator",
     text: "You're on a coffee run at the nearby cafe, waiting for your order...then suddenly...",
   },
-  { character: "barista", text: "I have an order for a large iced matcha!" },
+  { character: "barista", text: "I have an order for a large iced latte!" },
   {
     character: "narrator",
     text: "Without hestitation, you walk towards the counter...",
   },
   { character: "you", text: "Thanks!..." },
-  { character: "jet", text: "Wait! I think that matcha is mine actually." },
+  { character: "jet", text: "Wait! I think that latte is mine actually." },
   {
     character: "barista",
     text: "Oh, my bad, this is for Amelia. Neither of you are Amelia right?",
@@ -62,6 +63,7 @@ const skills = [
   "Jest",
   "Cypress",
   "Unit testing",
+  "React-hook-form",
   "e2e & integration testing",
   "Git/Github",
   "Github Actions",
@@ -75,12 +77,11 @@ const skills = [
   "Webpack",
   "Bootstrap",
   "Responsive design",
+  "Confluence",
   "Designer systems",
-  "React-hook-form",
   "Figma",
   "Product Management",
   "Jira",
-  "Confluence",
   "Scrum",
 ];
 
@@ -116,186 +117,234 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
     }
   };
 
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const [isMuted, setIsMuted] = React.useState<boolean>(false);
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play();
+        setIsMuted(false);
+      } else {
+        audioRef.current.pause();
+        setIsMuted(true);
+      }
+    }
+  };
+
   return (
-    <>
-      <button
-        style={{
-          padding: "1rem",
-          display: "flex",
-          justifyContent: "end",
-          width: "100vw",
-        }}
-        onClick={() => {
-          onClick();
-          setBar("no");
-        }}
-      >
-        Skip
-      </button>
+    <HandleEnter onEnter={handleNextClick}>
       <div
         style={{
+          backgroundImage: "url(/assets/BackgroundCoffee.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "100vh",
           width: "100vw",
-          height: "calc(100vh - 56px)",
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "center",
           fontFamily: "monospace",
-          flexDirection: "column",
         }}
       >
-        {character === "jet" ? (
-          <div className="image-wrapper">
-            <img
-              src="/assets/avatarCoffeeImage.png"
-              alt="Description"
-              className="fade-in-image"
-            />
-            {index === 9 ? (
-              <div className="skills-wrapper">
-                <div style={{ fontWeight: 700 }}>Skills</div>
-                <ul
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    listStyle: "none", // Removes bullets from list items
-                    padding: 0, // Removes default padding from the ul
-                    margin: 0, // Removes default margin from the ul
-                    gridGap: "8px", // Space between the list items
-                  }}
-                >
-                  {skills.map((skill) => (
-                    <li
-                      key={skill}
-                      style={{
-                        color: "white",
-                        flex: "0 1 auto",
-                        backgroundColor: "darkred",
-                        padding: "0.5rem",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
         <div
           style={{
-            width: "60vw",
-            height: "max-content",
-            padding: "1rem",
-            borderRadius: "8px",
-            marginBottom: "1rem",
-            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
-            background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
             display: "flex",
-            flexDirection: "column",
+            padding: "1rem",
+            justifyContent: "end",
+            width: "100vw",
             gridGap: "8px",
-            justifyContent: "space-between",
           }}
         >
-          {nameModal ? (
-            <>
-              <div>Enter your name:</div>
-              <input
-                style={{
-                  borderRadius: "16px",
-                  padding: "8px 16px",
-                  width: "40%",
-                }}
-                type="text"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
+          <button
+            className="skipButton"
+            onClick={() => {
+              onClick();
+              setBar("no");
+            }}
+          >
+            Skip
+          </button>
+          <div>|</div>
+          <div className="skipButton">
+            <audio ref={audioRef} src="/assets/Bach.mp3" autoPlay loop />
+            <div
+              onClick={toggleAudio}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              {isMuted ? "Audio" : "Mute"}
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            width: "100vw",
+            height: "calc(100vh - 56px)",
+            display: "flex",
+            justifyContent: "end",
+            alignItems: "center",
+            fontFamily: "monospace",
+            flexDirection: "column",
+          }}
+        >
+          {character === "jet" || character === "barista" ? (
+            <div className="image-wrapper">
+              <img
+                src={
+                  character === "jet"
+                    ? "/assets/avatarCoffeeImage.png"
+                    : "/assets/barista.png"
+                }
+                alt="Description"
+                className="fade-in-image"
               />
-              <button
-                className="buttonNext"
-                disabled={name === ""}
-                onClick={() => {
-                  setIndex(index + 1);
-                  setNameModal(false);
-                }}
-              >
-                Confirm
-              </button>
-            </>
-          ) : null}
-          {workModal ? (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setWorkModal(false);
-                  setWork("swe");
-                  setIndex(index + 1);
-                }}
-              >
-                Software engineer
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setWorkModal(false);
-                  setWork("recruiter");
-                  setIndex(index + 1);
-                }}
-              >
-                Recruiter for software engineers
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setWorkModal(false);
-                  setWork("other");
-                  setIndex(index + 1);
-                }}
-              >
-                Other
-              </button>
+              {index === 9 ? (
+                <div className="skills-wrapper">
+                  <div style={{ fontWeight: 700, color: "black" }}>Skills</div>
+                  <ul
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      listStyle: "none",
+                      padding: 0,
+                      margin: 0,
+                      gridGap: "8px",
+                    }}
+                  >
+                    {skills.map((skill) => (
+                      <li
+                        key={skill}
+                        style={{
+                          boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
+                          color: "black",
+                          flex: "0 1 auto",
+                          backgroundColor: "white",
+                          padding: "0.5rem",
+                          borderRadius: "4px",
+                        }}
+                      >
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </div>
           ) : null}
-          {barModal ? (
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setBarModal(false);
-                  setBar("yes");
-                  onClick();
-                }}
-              >
-                Yes! Sounds like fun, I will see you there!
-              </button>
-              <button
-                className="workButton"
-                onClick={() => {
-                  setBarModal(false);
-                  setBar("no");
-                  onClick();
-                }}
-              >
-                No thank you, I have plans
-              </button>
-            </div>
-          ) : null}
-          {!nameModal && !workModal && !barModal ? (
-            <>
-              <div style={{ display: "flex", gridGap: "2px" }}>
-                <div
-                  style={{ fontWeight: 700 }}
-                >{`${character.toUpperCase()}: `}</div>
-                <TypewriterEffect text={text} />
+          <div
+            style={{
+              width: nameModal ? "30vw" : "60vw",
+              height: "15vh",
+              padding: "1rem",
+              borderRadius: "8px",
+              marginBottom: "1rem",
+              boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
+              background: "#96DEE9",
+              display: "flex",
+              flexDirection: "column",
+              gridGap: "8px",
+              justifyContent: "space-between",
+            }}
+          >
+            {nameModal ? (
+              <>
+                <div>Enter your name:</div>
+                <input
+                  style={{
+                    borderRadius: "16px",
+                    padding: "8px 16px",
+                    width: "100%",
+                  }}
+                  type="text"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <button
+                  className="buttonNext"
+                  disabled={name === ""}
+                  onClick={() => {
+                    setIndex(index + 1);
+                    setNameModal(false);
+                  }}
+                >
+                  Confirm
+                </button>
+              </>
+            ) : null}
+            {workModal ? (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setWorkModal(false);
+                    setWork("swe");
+                    setIndex(index + 1);
+                  }}
+                >
+                  Software engineer
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setWorkModal(false);
+                    setWork("recruiter");
+                    setIndex(index + 1);
+                  }}
+                >
+                  Recruiter for software engineers
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setWorkModal(false);
+                    setWork("other");
+                    setIndex(index + 1);
+                  }}
+                >
+                  Other
+                </button>
               </div>
-              <button className="buttonNext" onClick={handleNextClick}>
-                Next
-              </button>
-            </>
-          ) : null}
+            ) : null}
+            {barModal ? (
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setBarModal(false);
+                    setBar("yes");
+                    onClick();
+                  }}
+                >
+                  Yes! Sounds like fun, I will see you there!
+                </button>
+                <button
+                  className="workButton"
+                  onClick={() => {
+                    setBarModal(false);
+                    setBar("no");
+                    onClick();
+                  }}
+                >
+                  No thank you, I have plans
+                </button>
+              </div>
+            ) : null}
+            {!nameModal && !workModal && !barModal ? (
+              <>
+                <div style={{ display: "flex", gridGap: "2px" }}>
+                  <div
+                    style={{ fontWeight: 700 }}
+                  >{`${character.toUpperCase()}: `}</div>
+                  <TypewriterEffect text={text} />
+                </div>
+                <button className="buttonNext" onClick={handleNextClick}>
+                  Next
+                </button>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
-    </>
+    </HandleEnter>
   );
 };
