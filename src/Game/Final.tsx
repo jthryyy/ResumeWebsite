@@ -88,7 +88,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
             height: "15vh",
             padding: "1rem",
             borderRadius: "8px",
-            boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
+            backgroundColor: "#D2D060",
             marginBottom: "1rem",
             background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
             display: "flex",

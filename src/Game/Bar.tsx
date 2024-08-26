@@ -179,10 +179,9 @@ export const Bar = (props: BarProps): JSX.Element => {
                     Experiences
                   </div>
                   <div
+                    className="glass"
                     style={{
-                      backgroundColor: "white",
                       padding: "8px",
-                      borderRadius: "8px",
                     }}
                   >
                     Managed, as a PM and technical lead, the end-to-end
@@ -200,10 +199,9 @@ export const Bar = (props: BarProps): JSX.Element => {
                     workflow for all customers.
                   </div>
                   <div
+                    className="glass"
                     style={{
-                      backgroundColor: "white",
                       padding: "8px",
-                      borderRadius: "8px",
                     }}
                   >
                     Lead the end-to-end development of{" "}
@@ -219,10 +217,9 @@ export const Bar = (props: BarProps): JSX.Element => {
                     countries to access verified labware.
                   </div>
                   <div
+                    className="glass"
                     style={{
-                      backgroundColor: "white",
                       padding: "8px",
-                      borderRadius: "8px",
                     }}
                   >
                     Spearheaded the development and revitalization of the

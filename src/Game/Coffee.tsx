@@ -212,14 +212,11 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   >
                     {skills.map((skill) => (
                       <li
+                        className="glass"
                         key={skill}
                         style={{
-                          boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
-                          color: "black",
                           flex: "0 1 auto",
-                          backgroundColor: "white",
                           padding: "0.5rem",
-                          borderRadius: "4px",
                         }}
                       >
                         {skill}

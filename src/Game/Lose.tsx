@@ -13,6 +13,9 @@ export function Loser(props: LoserProps): JSX.Element {
     <HandleEnter onEnter={onClick}>
       <div
         style={{
+          backgroundImage: "url(/assets/finalBackground.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           width: "100vw",
           height: "100vh",
           display: "flex",
@@ -30,7 +33,7 @@ export function Loser(props: LoserProps): JSX.Element {
             borderRadius: "8px",
             marginBottom: "1rem",
             boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.3)",
-            background: "linear-gradient(45deg, #e0bbe4, #add8e6)",
+            backgroundColor: "#D2D060",
             display: "flex",
             flexDirection: "column",
             gridGap: "8px",
