@@ -34,8 +34,6 @@ module.exports = merge(common, {
           },
         },
         parallel: true,
-        cache: true,
-        sourceMap: false,
       }),
       new CssMinimizerPlugin({
         sourceMap: true,
@@ -64,12 +62,13 @@ module.exports = merge(common, {
       inject: true,
       template: path.join(__dirname, "assets/index.ejs"),
       filename: path.join(__dirname, "build/index.html"),
-      title: "React Boilerplate",
+      title: "Jet Portfolio",
       favicon: path.join(__dirname, "public/favicon.ico"),
       url: "https://phonicsboard.learnupcenters.org/",
       custom: {
         react_lib: "https://unpkg.com/react@18/umd/react.production.js",
-        react_dom_lib: "https://unpkg.com/react-dom@18/umd/react-dom.production.js",
+        react_dom_lib:
+          "https://unpkg.com/react-dom@18/umd/react-dom.production.js",
       },
       minify: {
         removeComments: true,

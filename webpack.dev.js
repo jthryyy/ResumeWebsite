@@ -4,7 +4,7 @@ const common = require("./webpack.common.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "development",
@@ -30,12 +30,13 @@ module.exports = merge(common, {
       inject: true,
       template: path.join(__dirname, "assets/index.ejs"),
       filename: path.join(__dirname, "dist/index.html"),
-      title: "React Boilerplate",
+      title: "Jet Portfolio",
       favicon: path.join(__dirname, "public/favicon.ico"),
       url: "https://localhost:3001",
       custom: {
         react_lib: "https://unpkg.com/react@18/umd/react.development.js",
-        react_dom_lib: "https://unpkg.com/react-dom@18/umd/react-dom.development.js",
+        react_dom_lib:
+          "https://unpkg.com/react-dom@18/umd/react-dom.development.js",
       },
       minify: {
         removeComments: true,
