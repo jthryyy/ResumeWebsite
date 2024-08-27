@@ -20,6 +20,9 @@ export function Wizard(props: WizardProps): JSX.Element {
   const [earlyQuit, setEarlyQuit] = React.useState<boolean>(false);
   const [seat, setGrabSeat] = React.useState<"yes" | "no" | null>(null);
   const [contact, setContact] = React.useState<"yes" | "no" | null>(null);
+  console.log(
+    `TODO: still need to wire up ${work} and ${name} in the analytics`
+  );
 
   if (earlyQuit || bar === "no" || seat === "no" || contact === "no") {
     return (

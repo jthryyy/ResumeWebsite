@@ -33,7 +33,7 @@ export const Landing = (props: LandingProps): JSX.Element => {
           style={{
             fontSize: "2.5rem",
             color: "black",
-            backgroundColor: "white",
+            backgroundColor: "lightgrey",
             borderRadius: "8px",
             padding: "4px",
             width: "max-content",
@@ -45,7 +45,7 @@ export const Landing = (props: LandingProps): JSX.Element => {
           style={{
             fontSize: "1.5rem",
             color: "darkred",
-            backgroundColor: "white",
+            backgroundColor: "lightgrey",
             borderRadius: "8px",
             padding: "4px",
             width: "max-content",

@@ -25,11 +25,11 @@ const dialogues: DialogueEntry[] = [
   },
   {
     character: "hopia",
-    text: "Arf arf!!!",
+    text: "Borf! Borf!!!",
   },
   {
     character: "narrator",
-    text: "YOU WIN!",
+    text: "CONGRATULATIONS, YOU WIN!",
   },
 ];
 

@@ -304,7 +304,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                     setIndex(index + 1);
                   }}
                 >
-                  Recruiter for software engineers
+                  Recruiter
                 </button>
                 <button
                   className="workButton"
