@@ -2,10 +2,13 @@ import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
 import { useAudio } from "../AudioContext";
-import type { WorkType } from ".";
+
+import barista from "../Assets/barista_2.png";
+import backgroundCoffee from "../Assets/BackgroundCoffee.jpg";
+import avatarBar from "../Assets/jet_2.png";
 
 import "../own.css";
-
+import type { WorkType } from ".";
 interface DialogueEntry {
   character: Character;
   text: string;
@@ -153,7 +156,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
     >
       <div
         style={{
-          backgroundImage: "url(/assets/BackgroundCoffee.jpg)",
+          backgroundImage: `url(${backgroundCoffee})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100vh",
@@ -181,7 +184,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           </button>
           <div>|</div>
           <div className="skipButton">
-            <audio ref={audioRef} src="/assets/Bach.mp3" autoPlay loop />
+            <audio ref={audioRef} src={"/assets/Bach2.mp3"} autoPlay loop />
             <div
               onClick={toggleAudio}
               style={{
@@ -206,11 +209,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           {character === "jet" || character === "barista" ? (
             <div className="image-wrapper">
               <img
-                src={
-                  character === "jet"
-                    ? "/assets/avatarCoffeeImage.png"
-                    : "/assets/barista.png"
-                }
+                src={character === "jet" ? avatarBar : barista}
                 alt="Description"
                 className="fade-in-image"
               />

@@ -117,7 +117,7 @@
   transform: translateX(-100%);
   animation: fadeInFromLeft 2s forwards;
   width: max-content;
-  height: auto;
+  height: 100%;
 }
 
 @keyframes fadeInFromLeft {

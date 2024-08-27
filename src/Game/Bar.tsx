@@ -2,7 +2,9 @@ import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
 import { useAudio } from "../AudioContext";
-
+import avatarBar from "../Assets/jet_2.png";
+import len from "../Assets/len_2.png";
+import background from "../Assets/biergartenBackground.jpg";
 import "../own.css";
 
 interface DialogueEntry {
@@ -134,7 +136,7 @@ export const Bar = (props: BarProps): JSX.Element => {
     >
       <div
         style={{
-          backgroundImage: "url(/assets/biergartenBackground.jpg)",
+          backgroundImage: `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100vh",
@@ -162,7 +164,7 @@ export const Bar = (props: BarProps): JSX.Element => {
           </button>
           <div style={{ color: "white" }}>|</div>
           <div className="backButton">
-            <audio ref={audioRef} src="/assets/Bach2.mp3" autoPlay loop />
+            <audio ref={audioRef} src={"/assets/Bach.mp3"} autoPlay loop />
             <div
               onClick={toggleAudio}
               style={{
@@ -184,10 +186,10 @@ export const Bar = (props: BarProps): JSX.Element => {
             flexDirection: "column",
           }}
         >
-          {character === "jet" ? (
+          {character === "jet" || character === "len" ? (
             <div className="image-wrapper">
               <img
-                src="/assets/avatarBar.png"
+                src={character === "jet" ? avatarBar : len}
                 alt="Description"
                 className="fade-in-image"
               />

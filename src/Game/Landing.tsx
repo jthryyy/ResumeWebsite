@@ -1,6 +1,6 @@
 import * as React from "react";
 import "../own.css";
-
+import background from "../Assets/samoyedBackground2.jpg";
 interface LandingProps {
   onClick: () => void;
   earlyQuit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,29 +11,13 @@ export const Landing = (props: LandingProps): JSX.Element => {
   return (
     <div
       style={{
-        backgroundImage: "url(/assets/samoyedBackground2.jpg)",
+        backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
         width: "100vw",
       }}
     >
-      {/* <div
-        style={{ position: "absolute", bottom: 0, right: "-30%", zIndex: 6 }}
-      >
-        <img src={"/assets/Samoyed.png"} height="30%" width="50%" />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          height: "80%",
-          zIndex: 5,
-        }}
-      >
-        <img src={"/assets/avatarFrontPage.png"} height="100%" width="100%" />
-      </div> */}
       <div
         style={{
           display: "flex",

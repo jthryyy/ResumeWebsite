@@ -1,9 +1,10 @@
 import * as React from "react";
 
 import "../own.css";
-import { Back, LinkedIn } from "../Game/Components/Icons";
-import { Github } from "../Game/Components/Icons/Github";
-
+import { Back } from "../Game/Components/Icons";
+import hopia from "../Assets/samoyedBackground2.jpg";
+import about from "../Assets/meAndHop.jpeg";
+import samoyed from "../Assets/Samoyed.png";
 interface ResumeProps {
   isWin: boolean;
   goBack: () => void;
@@ -13,7 +14,7 @@ export function Resume(props: ResumeProps): JSX.Element {
   return (
     <div
       style={{
-        backgroundImage: "url(/assets/samoyedBackground2.jpg)",
+        backgroundImage: `url(${hopia})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         // background: "darkred",
@@ -30,46 +31,20 @@ export function Resume(props: ResumeProps): JSX.Element {
         style={{
           display: "flex",
           padding: "1rem",
-          justifyContent: "end",
+          justifyContent: "start",
           width: "100vw",
           gridGap: "4px",
           color: "white",
           alignItems: "center",
         }}
       >
-        <a
-          href={"http://www.linkedin.com/in/jethary-alcid-5ab428153/"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nav"
-        >
-          LinkedIn
-        </a>
-        <div> | </div>
-        <a
-          href={"https://github.com/jerader"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nav"
-        >
-          Github
-        </a>
-        <div> | </div>
-        <a
-          href={"https://github.com/jthryyy"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nav"
-        >
-          Personal Github
-        </a>
         <Back onClick={goBack} />
       </div>
-      {/* {isWin ? ( */}
-      <div className="moving-div">
-        <img src={"/assets/Samoyed.png"} />
-      </div>
-      {/* ) : null} */}
+      {isWin ? (
+        <div className="moving-div">
+          <img src={samoyed} />
+        </div>
+      ) : null}
       <>
         <About isWin={isWin} />
         <div
@@ -237,9 +212,12 @@ export const About = (props: AboutProps): JSX.Element => {
         >
           <img
             alt="portrait"
-            src={"/assets/meAndHop.jpeg"}
-            width="170px"
+            src={about}
             style={{
+              width: "100%",
+              height: "100%",
+              minHeight: "50%",
+              minWidth: "50%",
               borderRadius: "3rem",
               boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.2)",
             }}
@@ -252,10 +230,10 @@ export const About = (props: AboutProps): JSX.Element => {
             flexDirection: "column",
           }}
         >
-          <div style={{ marginTop: "1rem" }}>
+          <div style={{ marginTop: "1rem", padding: "1rem" }}>
             <div
               style={{
-                width: "100%",
+                width: "70%",
                 fontSize: "1.6rem",
                 display: "flex",
                 fontWeight: 600,
@@ -277,15 +255,54 @@ export const About = (props: AboutProps): JSX.Element => {
               )}
             </div>
           </div>
-          <div style={{ marginTop: "2rem" }}>
-            I am a lab scientist turned developer who prioritizes creating
-            user-friendly, visually stunning, and streamlined UI.
+          <div style={{ marginTop: "2rem", width: "70%" }}>
+            I am a lab scientist turned software developer, specializing in
+            React, Javascipt, Typescript, and Next.js.
           </div>
-          <div style={{ marginTop: "1rem" }}>
-            Reach out if you want to chat about code, my game, or Hopia.
+          <div style={{ marginTop: "1rem", width: "70%" }}>
+            Reach out if I can help with code or if you want to learn more about
+            Hopia!
           </div>
           <div style={{ marginTop: "1rem", fontWeight: 700 }}>
             Email: jetharyalcid@gmail.com
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              width: "100vw",
+              gridGap: "4px",
+              color: "white",
+              alignItems: "center",
+              marginTop: "1rem",
+            }}
+          >
+            <a
+              href={"http://www.linkedin.com/in/jethary-alcid-5ab428153/"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              LinkedIn
+            </a>
+            <div style={{ color: "black" }}> | </div>
+            <a
+              href={"https://github.com/jerader"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              Github
+            </a>
+            <div style={{ color: "black" }}> | </div>
+            <a
+              href={"https://github.com/jthryyy"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              Personal Github
+            </a>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
+import final from "../Assets/finalBackground.jpg";
 
 import "../own.css";
 
@@ -13,7 +14,7 @@ export function Loser(props: LoserProps): JSX.Element {
     <HandleEnter onEnter={onClick}>
       <div
         style={{
-          backgroundImage: "url(/assets/finalBackground.jpg)",
+          backgroundImage: `url(${final})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100vw",

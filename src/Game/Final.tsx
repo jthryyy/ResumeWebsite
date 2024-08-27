@@ -1,6 +1,10 @@
 import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
+import final from "../Assets/finalBackground.jpg";
+import avatar from "../Assets/jet_2.png";
+import hopia from "../Assets/Samoyed.png";
+import { useAudio } from "../AudioContext";
 import "../own.css";
 
 interface DialogueEntry {
@@ -35,9 +39,20 @@ interface FinaleProps {
 
 export const Final = (props: FinaleProps): JSX.Element => {
   const { onClick } = props;
+  const { isMuted, audioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const currentDialogue = dialogues[index];
   const { character, text } = currentDialogue;
+
+  React.useEffect(() => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+    }
+  }, [isMuted]);
 
   const handleNextClick = (): void => {
     const nextIndex = index + 1;
@@ -50,9 +65,12 @@ export const Final = (props: FinaleProps): JSX.Element => {
 
   return (
     <HandleEnter onEnter={handleNextClick}>
+      {index === 2 ? (
+        <audio ref={audioRef} src={"/assets/dogBark.wav"} autoPlay loop />
+      ) : null}
       <div
         style={{
-          backgroundImage: "url(/assets/finalBackground.jpg)",
+          backgroundImage: `url(${final})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100vw",
@@ -66,20 +84,12 @@ export const Final = (props: FinaleProps): JSX.Element => {
       >
         {character === "jet" ? (
           <div className="image-wrapper">
-            <img
-              src="/assets/avatarBar.png"
-              alt="Description"
-              className="fade-in-image"
-            />
+            <img src={avatar} alt="Description" className="fade-in-image" />
           </div>
         ) : null}
         {character === "hopia" ? (
           <div className="image-wrapper">
-            <img
-              src="/assets/Samoyed.png"
-              alt="Description"
-              className="fade-in-image"
-            />
+            <img src={hopia} alt="Description" className="fade-in-image" />
           </div>
         ) : null}
         <div
