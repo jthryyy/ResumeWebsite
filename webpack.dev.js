@@ -35,8 +35,7 @@ module.exports = merge(common, {
       url: "https://localhost:3001",
       custom: {
         react_lib: "https://unpkg.com/react@18/umd/react.development.js",
-        react_dom_lib:
-          "https://unpkg.com/react-dom@18/umd/react-dom.development.js",
+        react_dom_lib: "https://unpkg.com/react-dom@18/umd/react-dom.development.js",
       },
       minify: {
         removeComments: true,

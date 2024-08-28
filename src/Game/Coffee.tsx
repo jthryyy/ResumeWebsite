@@ -6,9 +6,8 @@ import { useAudio } from "../AudioContext";
 import barista from "../Assets/barista_2.png";
 import backgroundCoffee from "../Assets/BackgroundCoffee.jpg";
 import avatarBar from "../Assets/jet_2.png";
-
-import "../own.css";
 import type { WorkType } from ".";
+import { chatClassName, textClassName } from "../constants";
 interface DialogueEntry {
   character: Character;
   text: string;
@@ -161,7 +160,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           backgroundPosition: "center",
           height: "100vh",
           width: "100vw",
-          fontFamily: "monospace",
+          fontFamily: "Open Sans, sans-serif",
         }}
       >
         <div
@@ -202,7 +201,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             display: "flex",
             justifyContent: "end",
             alignItems: "center",
-            fontFamily: "monospace",
+            fontFamily: "Open Sans, sans-serif",
             flexDirection: "column",
           }}
         >
@@ -210,12 +209,17 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             <div className="image-wrapper">
               <img
                 src={character === "jet" ? avatarBar : barista}
-                alt="Description"
-                className="fade-in-image"
+                alt={character}
+                className={index === 9 ? "hidden md:block fade-in-image" : "fade-in-image"}
               />
               {index === 9 ? (
                 <div className="skills-wrapper">
-                  <div style={{ fontWeight: 700, color: "black" }}>Skills</div>
+                  <div
+                    className={textClassName}
+                    style={{ fontWeight: 700, color: "black" }}
+                  >
+                    Skills
+                  </div>
                   <ul
                     style={{
                       display: "flex",
@@ -228,7 +232,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   >
                     {skills.map((skill) => (
                       <li
-                        className="glass"
+                        className={`glass ${textClassName}`}
                         key={skill}
                         style={{
                           flex: "0 1 auto",
@@ -244,9 +248,9 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             </div>
           ) : null}
           <div
+            className={chatClassName}
             style={{
-              width: nameModal ? "30vw" : "60vw",
-              height: "15vh",
+              height: "max-content",
               padding: "1rem",
               borderRadius: "8px",
               marginBottom: "1rem",
@@ -260,7 +264,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           >
             {nameModal ? (
               <>
-                <div>Enter your name:</div>
+                <div className={textClassName}>Enter your name:</div>
                 <input
                   style={{
                     borderRadius: "16px",
@@ -273,7 +277,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   }}
                 />
                 <button
-                  className="buttonNext"
+                  className={`buttonNext ${textClassName}`}
                   disabled={name === ""}
                   onClick={() => {
                     setIndex(index + 1);
@@ -287,7 +291,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             {workModal ? (
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <button
-                  className="workButton"
+                  className={`workButton ${textClassName}`}
                   onClick={() => {
                     setWorkModal(false);
                     setWork("swe");
@@ -297,7 +301,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   Software engineer
                 </button>
                 <button
-                  className="workButton"
+                  className={`workButton ${textClassName}`}
                   onClick={() => {
                     setWorkModal(false);
                     setWork("recruiter");
@@ -307,7 +311,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   Recruiter
                 </button>
                 <button
-                  className="workButton"
+                  className={`workButton ${textClassName}`}
                   onClick={() => {
                     setWorkModal(false);
                     setWork("other");
@@ -321,7 +325,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
             {barModal ? (
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <button
-                  className="workButton"
+                  className={`workButton ${textClassName}`}
                   onClick={() => {
                     setBarModal(false);
                     setBar("yes");
@@ -331,7 +335,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                   Yes! Sounds like fun, I will see you there!
                 </button>
                 <button
-                  className="workButton"
+                  className={`workButton ${textClassName}`}
                   onClick={() => {
                     setBarModal(false);
                     setBar("no");
@@ -346,11 +350,15 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
               <>
                 <div style={{ display: "flex", gridGap: "2px" }}>
                   <div
+                    className={textClassName}
                     style={{ fontWeight: 700 }}
                   >{`${character.toUpperCase()}: `}</div>
                   <TypewriterEffect text={text} />
                 </div>
-                <button className="buttonNext" onClick={handleNextClick}>
+                <button
+                  className={`buttonNext ${textClassName}`}
+                  onClick={handleNextClick}
+                >
                   Next
                 </button>
               </>

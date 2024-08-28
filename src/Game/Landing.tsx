@@ -1,6 +1,6 @@
 import * as React from "react";
-import "../own.css";
 import background from "../Assets/samoyedBackground2.jpg";
+import { textClassName } from "../constants";
 interface LandingProps {
   onClick: () => void;
   earlyQuit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,12 +10,15 @@ export const Landing = (props: LandingProps): JSX.Element => {
 
   return (
     <div
+      className="justify-center"
       style={{
         backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
         width: "100vw",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <div
@@ -31,7 +34,7 @@ export const Landing = (props: LandingProps): JSX.Element => {
       >
         <h3
           style={{
-            fontSize: "2.5rem",
+            fontSize: "3rem",
             color: "black",
             backgroundColor: "lightgrey",
             borderRadius: "8px",
@@ -45,7 +48,7 @@ export const Landing = (props: LandingProps): JSX.Element => {
           style={{
             fontSize: "1.5rem",
             color: "darkred",
-            backgroundColor: "lightgrey",
+            fontWeight: 700,
             borderRadius: "8px",
             padding: "4px",
             width: "max-content",
@@ -76,18 +79,18 @@ export const Landing = (props: LandingProps): JSX.Element => {
         }}
       >
         <button
-          className="secondary-button"
+          className={`secondary-button ${textClassName}`}
           onClick={() => {
             earlyQuit(true);
           }}
         >
           Skip game and go to resume
         </button>
-        <button className="button" onClick={onClick}>
+        <button className={`button ${textClassName}`} onClick={onClick}>
           Play
         </button>
       </div>
-      <div className="text-element">
+      <div className={`text-element ${textClassName}`}>
         This game is best if played on a desktop
       </div>
     </div>

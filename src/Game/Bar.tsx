@@ -5,7 +5,7 @@ import { useAudio } from "../AudioContext";
 import avatarBar from "../Assets/jet_2.png";
 import len from "../Assets/len_2.png";
 import background from "../Assets/biergartenBackground.jpg";
-import "../own.css";
+import { chatClassName, textClassName } from "../constants";
 
 interface DialogueEntry {
   character: Character;
@@ -141,7 +141,7 @@ export const Bar = (props: BarProps): JSX.Element => {
           backgroundPosition: "center",
           height: "100vh",
           width: "100vw",
-          fontFamily: "monospace",
+          fontFamily: "Open Sans, sans-serif",
         }}
       >
         <div
@@ -182,7 +182,7 @@ export const Bar = (props: BarProps): JSX.Element => {
             display: "flex",
             justifyContent: "end",
             alignItems: "center",
-            fontFamily: "monospace",
+            fontFamily: "Open Sans, sans-serif",
             flexDirection: "column",
           }}
         >
@@ -191,11 +191,11 @@ export const Bar = (props: BarProps): JSX.Element => {
               <img
                 src={character === "jet" ? avatarBar : len}
                 alt="Description"
-                className="fade-in-image"
+                className={index === 12 ? "hidden md:block fade-in-image" : "fade-in-image"}
               />
               {index === 12 ? (
                 <div className="skills-wrapper" style={{ overflow: "scroll" }}>
-                  <div style={{ fontWeight: 700, color: "black" }}>
+                  <div style={{ fontWeight: 700, color: "white" }}>
                     Experiences
                   </div>
                   <div
@@ -252,9 +252,9 @@ export const Bar = (props: BarProps): JSX.Element => {
             </div>
           ) : null}
           <div
+            className={chatClassName}
             style={{
-              width: "60vw",
-              height: "15vh",
+              height: "max-content",
               padding: "1rem",
               borderRadius: "8px",
               marginBottom: "1rem",
@@ -339,14 +339,20 @@ export const Bar = (props: BarProps): JSX.Element => {
             {!contactModal && !scienceModal && !grabSeatModal ? (
               <>
                 <div style={{ display: "flex", gridGap: "2px" }}>
-                  <div style={{ fontWeight: 700 }}>{`${
+                  <div
+                    className={textClassName}
+                    style={{ fontWeight: 700 }}
+                  >{`${
                     character === "you" && name !== ""
                       ? name.toUpperCase()
                       : character.toUpperCase()
                   }: `}</div>
                   <TypewriterEffect text={text} />
                 </div>
-                <button className="buttonNext" onClick={handleNextClick}>
+                <button
+                  className={`buttonNext ${textClassName}`}
+                  onClick={handleNextClick}
+                >
                   Next
                 </button>
               </>

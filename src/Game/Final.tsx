@@ -5,7 +5,7 @@ import final from "../Assets/finalBackground.jpg";
 import avatar from "../Assets/jet_2.png";
 import hopia from "../Assets/Samoyed.png";
 import { useAudio } from "../AudioContext";
-import "../own.css";
+import { chatClassName, textClassName } from "../constants";
 
 interface DialogueEntry {
   character: Character;
@@ -78,7 +78,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
           display: "flex",
           justifyContent: "end",
           alignItems: "center",
-          fontFamily: "monospace",
+          fontFamily: "Open Sans, sans-serif",
           flexDirection: "column",
         }}
       >
@@ -93,9 +93,10 @@ export const Final = (props: FinaleProps): JSX.Element => {
           </div>
         ) : null}
         <div
+          className={chatClassName}
           style={{
             width: "60vw",
-            height: "15vh",
+            height: "max-content",
             padding: "1rem",
             borderRadius: "8px",
             backgroundColor: "#D2D060",
@@ -109,11 +110,15 @@ export const Final = (props: FinaleProps): JSX.Element => {
         >
           <div style={{ display: "flex", gridGap: "2px" }}>
             <div
+              className={textClassName}
               style={{ fontWeight: 700 }}
             >{`${character.toUpperCase()}: `}</div>
             <TypewriterEffect text={text} />
           </div>
-          <button className="buttonNext" onClick={handleNextClick}>
+          <button
+            className={`buttonNext ${textClassName}`}
+            onClick={handleNextClick}
+          >
             {index === 3 ? "Look at resume" : "Next"}
           </button>
         </div>

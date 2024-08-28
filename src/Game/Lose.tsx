@@ -2,8 +2,7 @@ import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
 import final from "../Assets/finalBackground.jpg";
-
-import "../own.css";
+import { chatClassName, textClassName } from "../constants";
 
 interface LoserProps {
   onClick: () => void;
@@ -22,14 +21,15 @@ export function Loser(props: LoserProps): JSX.Element {
           display: "flex",
           justifyContent: "end",
           alignItems: "center",
-          fontFamily: "monospace",
+          fontFamily: "Open Sans, sans-serif",
           flexDirection: "column",
         }}
       >
         <div
+          className={chatClassName}
           style={{
             width: "60vw",
-            height: "15vh",
+            height: "max-content",
             padding: "1rem",
             borderRadius: "8px",
             marginBottom: "1rem",
@@ -42,10 +42,12 @@ export function Loser(props: LoserProps): JSX.Element {
           }}
         >
           <div style={{ display: "flex", gridGap: "2px" }}>
-            <div style={{ fontWeight: 700 }}>{"NARRATOR:"}</div>
+            <div className={textClassName} style={{ fontWeight: 700 }}>
+              {"NARRATOR:"}
+            </div>
             <TypewriterEffect text="YOU LOSE. Sorry, you do not get to meet Hopia." />
           </div>
-          <button className="buttonNext" onClick={onClick}>
+          <button className={`buttonNext ${textClassName}`} onClick={onClick}>
             Look at resume
           </button>
         </div>

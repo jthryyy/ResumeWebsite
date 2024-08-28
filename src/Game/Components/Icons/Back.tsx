@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../../../own.css";
 interface BackProps {
   onClick: () => void;
 }

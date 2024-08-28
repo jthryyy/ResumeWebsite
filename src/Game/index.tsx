@@ -45,7 +45,7 @@ export function Wizard(props: WizardProps): JSX.Element {
           flexDirection: "column",
           color: "white",
           alignItems: "center",
-          fontFamily: "monospace",
+          fontFamily: "Open Sans, sans-serif",
         }}
       >
         <Landing

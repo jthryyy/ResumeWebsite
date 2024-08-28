@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { textClassName } from "../constants";
 interface EffectProps {
   text: string;
 }
@@ -17,10 +17,10 @@ export const TypewriterEffect = (props: EffectProps): JSX.Element => {
       if (index >= text.length) {
         clearInterval(interval);
       }
-    }, 20);
+    }, 25);
 
     return () => clearInterval(interval);
   }, [text]);
 
-  return <div>{displayedText}</div>;
+  return <div className={textClassName}>{displayedText}</div>;
 };

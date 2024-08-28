@@ -66,9 +66,8 @@ module.exports = merge(common, {
       favicon: path.join(__dirname, "public/favicon.ico"),
       url: "https://phonicsboard.learnupcenters.org/",
       custom: {
-        react_lib: "https://unpkg.com/react@18/umd/react.production.js",
-        react_dom_lib:
-          "https://unpkg.com/react-dom@18/umd/react-dom.production.js",
+        react_lib: "https://unpkg.com/react@18.3.1/umd/react.production.min.js",
+        react_dom_lib: "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js",
       },
       minify: {
         removeComments: true,

@@ -1,6 +1,4 @@
 import * as React from "react";
-
-import "../own.css";
 import { Back } from "../Game/Components/Icons";
 import hopia from "../Assets/samoyedBackground2.jpg";
 import about from "../Assets/meAndHop.jpeg";
@@ -22,7 +20,7 @@ export function Resume(props: ResumeProps): JSX.Element {
         minHeight: "100vh",
         width: "100vw",
         // position: "relative",
-        fontFamily: "monospace",
+        fontFamily: "Open Sans, sans-serif",
         paddingBottom: "2rem",
         // overflow: "hidden",
       }}
