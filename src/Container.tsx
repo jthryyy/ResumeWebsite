@@ -25,7 +25,6 @@ export function Container(): JSX.Element {
             }}
           />
         )}
-        ;
       </AudioProvider>
     </div>
   );

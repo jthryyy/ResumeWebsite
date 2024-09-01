@@ -78,7 +78,7 @@ interface BarProps {
 
 export const Bar = (props: BarProps): JSX.Element => {
   const { onClick, name, setGrabSeat, setContactInfo } = props;
-  const { isMuted, toggleAudio, audioRef } = useAudio();
+  const { isMuted, toggleAudio, backgroundAudioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const [grabSeatModal, setGrabSeatModal] = React.useState<boolean>(false);
   const [scienceModal, setSkipScienceModal] = React.useState<boolean>(false);
@@ -87,11 +87,11 @@ export const Bar = (props: BarProps): JSX.Element => {
   const { character, text } = currentDialogue;
 
   React.useEffect(() => {
-    if (audioRef.current) {
+    if (backgroundAudioRef.current) {
       if (isMuted) {
-        audioRef.current.pause();
+        backgroundAudioRef.current.pause();
       } else {
-        audioRef.current.play();
+        backgroundAudioRef.current.play();
       }
     }
   }, [isMuted]);
@@ -164,7 +164,12 @@ export const Bar = (props: BarProps): JSX.Element => {
           </button>
           <div style={{ color: "white" }}>|</div>
           <div className="backButton">
-            <audio ref={audioRef} src={"/assets/Bach.mp3"} autoPlay loop />
+            <audio
+              ref={backgroundAudioRef}
+              src={"/assets/Bach.mp3"}
+              autoPlay
+              loop
+            />
             <div
               onClick={toggleAudio}
               style={{
@@ -191,12 +196,19 @@ export const Bar = (props: BarProps): JSX.Element => {
               <img
                 src={character === "jet" ? avatarBar : len}
                 alt="Description"
-                className={index === 12 ? "hidden md:block fade-in-image" : "fade-in-image"}
+                className={
+                  index === 12
+                    ? "hidden md:block fade-in-image"
+                    : "fade-in-image"
+                }
               />
               {index === 12 ? (
-                <div className="skills-wrapper" style={{ overflow: "scroll" }}>
+                <div
+                  className={`skills-wrapper ${textClassName}`}
+                  style={{ overflow: "scroll" }}
+                >
                   <div style={{ fontWeight: 700, color: "white" }}>
-                    Experiences
+                    Most Recent Experience
                   </div>
                   <div
                     className="glass"
@@ -267,7 +279,10 @@ export const Bar = (props: BarProps): JSX.Element => {
             }}
           >
             {grabSeatModal ? (
-              <>
+              <div
+                className={textClassName}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
                 <button
                   className="workButton"
                   onClick={() => {
@@ -288,10 +303,13 @@ export const Bar = (props: BarProps): JSX.Element => {
                 >
                   No, that's okay
                 </button>
-              </>
+              </div>
             ) : null}
             {scienceModal ? (
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                className={textClassName}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
                 <button
                   className="workButton"
                   onClick={() => {
@@ -313,7 +331,10 @@ export const Bar = (props: BarProps): JSX.Element => {
               </div>
             ) : null}
             {contactModal ? (
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                className={textClassName}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
                 <button
                   className="workButton"
                   onClick={() => {

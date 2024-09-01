@@ -28,7 +28,6 @@ export function Loser(props: LoserProps): JSX.Element {
         <div
           className={chatClassName}
           style={{
-            width: "60vw",
             height: "max-content",
             padding: "1rem",
             borderRadius: "8px",

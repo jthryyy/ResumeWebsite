@@ -2,12 +2,11 @@ import * as React from "react";
 import { TypewriterEffect } from "./utils";
 import { HandleEnter } from "./Components/HandleEnter";
 import { useAudio } from "../AudioContext";
-
 import barista from "../Assets/barista_2.png";
 import backgroundCoffee from "../Assets/BackgroundCoffee.jpg";
 import avatarBar from "../Assets/jet_2.png";
-import type { WorkType } from ".";
 import { chatClassName, textClassName } from "../constants";
+import type { WorkType } from ".";
 interface DialogueEntry {
   character: Character;
   text: string;
@@ -29,7 +28,7 @@ const dialogues: DialogueEntry[] = [
   { character: "jet", text: "Wait! I think that latte is mine actually." },
   {
     character: "barista",
-    text: "Oh, my bad, this is for Amelia. Neither of you are Amelia right?",
+    text: "Oh, my bad, this is for Megatron. Neither of you are Megatron right?",
   },
   {
     character: "narrator",
@@ -98,18 +97,18 @@ interface CoffeeProps {
 
 export const Coffee = (props: CoffeeProps): JSX.Element => {
   const { onClick, setName, name, setWork, setBar } = props;
-  const { isMuted, toggleAudio, audioRef } = useAudio();
+  const { isMuted, toggleAudio, backgroundAudioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const [nameModal, setNameModal] = React.useState<boolean>(false);
   const [workModal, setWorkModal] = React.useState<boolean>(false);
   const [barModal, setBarModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    if (audioRef.current) {
+    if (backgroundAudioRef.current) {
       if (isMuted) {
-        audioRef.current.pause();
+        backgroundAudioRef.current.pause();
       } else {
-        audioRef.current.play();
+        backgroundAudioRef.current.play();
       }
     }
   }, [isMuted]);
@@ -133,7 +132,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
   };
 
   const handleEnter = (): void => {
-    if (nameModal) {
+    if (nameModal && name !== "") {
       setIndex(index + 1);
       setNameModal(false);
     } else if (workModal) {
@@ -183,7 +182,12 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           </button>
           <div>|</div>
           <div className="skipButton">
-            <audio ref={audioRef} src={"/assets/Bach2.mp3"} autoPlay loop />
+            <audio
+              ref={backgroundAudioRef}
+              src={"/assets/Bach2.mp3"}
+              autoPlay
+              loop
+            />
             <div
               onClick={toggleAudio}
               style={{
@@ -210,7 +214,11 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
               <img
                 src={character === "jet" ? avatarBar : barista}
                 alt={character}
-                className={index === 9 ? "hidden md:block fade-in-image" : "fade-in-image"}
+                className={
+                  index === 9
+                    ? "hidden lg:block fade-in-image"
+                    : "fade-in-image"
+                }
               />
               {index === 9 ? (
                 <div className="skills-wrapper">
@@ -271,6 +279,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
                     padding: "8px 16px",
                     width: "100%",
                   }}
+                  autoFocus
                   type="text"
                   onChange={(e) => {
                     setName(e.target.value);

@@ -39,17 +39,17 @@ interface FinaleProps {
 
 export const Final = (props: FinaleProps): JSX.Element => {
   const { onClick } = props;
-  const { isMuted, audioRef } = useAudio();
+  const { isMuted, backgroundAudioRef } = useAudio();
   const [index, setIndex] = React.useState<number>(0);
   const currentDialogue = dialogues[index];
   const { character, text } = currentDialogue;
 
   React.useEffect(() => {
-    if (audioRef.current) {
+    if (backgroundAudioRef.current) {
       if (isMuted) {
-        audioRef.current.pause();
+        backgroundAudioRef.current.pause();
       } else {
-        audioRef.current.play();
+        backgroundAudioRef.current.play();
       }
     }
   }, [isMuted]);
@@ -66,7 +66,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
   return (
     <HandleEnter onEnter={handleNextClick}>
       {index === 2 ? (
-        <audio ref={audioRef} src={"/assets/dogBark.wav"} autoPlay loop />
+        <audio ref={backgroundAudioRef} src={"/assets/dogBark.wav"} autoPlay />
       ) : null}
       <div
         style={{
@@ -95,7 +95,6 @@ export const Final = (props: FinaleProps): JSX.Element => {
         <div
           className={chatClassName}
           style={{
-            width: "60vw",
             height: "max-content",
             padding: "1rem",
             borderRadius: "8px",
