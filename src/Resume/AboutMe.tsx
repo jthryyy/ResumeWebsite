@@ -7,7 +7,7 @@ import { HandleEnter } from "../Game/Components/HandleEnter";
 import avatar from "../Assets/jet_2.png";
 import hop from "../Assets/Samoyed.png";
 import lenny from "../Assets/len_2.png";
-import samoyed from "../Assets/Samoyed.png";
+import whole from "../Assets/wholeFam.png";
 
 interface DialogueEntry {
   character: Character;
@@ -133,44 +133,35 @@ export function AboutMe(props: Props): JSX.Element {
                     Personal Github
                   </a>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    position: "fixed",
-                    bottom: 0,
-                    left: "10%",
-                    height: "40%",
-                    width: "60%",
-                  }}
-                >
-                  <img src={lenny} />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    position: "fixed",
-                    bottom: 0,
-                    left: "50%",
-                    height: "35%",
-                    width: "45%",
-                  }}
-                >
-                  <img src={avatar} />
-                </div>
+
                 {isWon ? (
                   <div
                     style={{
                       display: "flex",
                       position: "fixed",
                       bottom: 0,
-                      left: "30%",
-                      height: "30%",
-                      width: "45%",
+                      left: 0,
+                      height: "auto",
+                      maxHeight: "90%",
+                      width: "auto",
                     }}
                   >
-                    <img src={samoyed} />
+                    <img src={whole} />
                   </div>
-                ) : null}
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      position: "fixed",
+                      bottom: 0,
+                      left: 0,
+                      width: "80%",
+                      height: "auto",
+                    }}
+                  >
+                    <img src={avatar} />
+                  </div>
+                )}
               </>
             ) : null}
           </div>
@@ -193,8 +184,19 @@ export function AboutMe(props: Props): JSX.Element {
                   <strong>Hi! I hope you enjoyed my portfolio.</strong>
                   <div>
                     Feel free to email me at{" "}
-                    <strong>jetharyalcid@gmail.com</strong> if you want to talk
-                    about code, jobs, or Hopia.
+                    <strong
+                      style={{ fontWeight: 600 }}
+                      className="link"
+                      onClick={() => {
+                        navigator.clipboard.writeText("jetharyalcid@gmail.com");
+                        alert(
+                          "Jet's email address has been copied to your clipboard"
+                        );
+                      }}
+                    >
+                      jetharyalcid@gmail.com
+                    </strong>{" "}
+                    if you want to talk about code, jobs, or Hopia.
                   </div>
                 </div>
               </div>
