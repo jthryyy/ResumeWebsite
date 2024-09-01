@@ -3,7 +3,7 @@ import { Landing } from "./Landing";
 import { Coffee } from "./Coffee";
 import { Bar } from "./Bar";
 import { Final } from "./Final";
-import { Loser } from "./Lose";
+import { Loser } from "./Loser";
 
 type PageType = "landing" | "coffee" | "bar" | "final";
 export type WorkType = "recruiter" | "swe" | "other";
