@@ -79,6 +79,7 @@ export function AboutMe(props: Props): JSX.Element {
       <>
         <div
           style={{
+            backgroundColor: "black",
             backgroundImage: `url(${bedroom})`,
             backgroundSize: "cover",
             backgroundPosition: "center",

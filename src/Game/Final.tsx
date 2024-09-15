@@ -70,6 +70,7 @@ export const Final = (props: FinaleProps): JSX.Element => {
       ) : null}
       <div
         style={{
+          backgroundColor: "black",
           backgroundImage: `url(${final})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

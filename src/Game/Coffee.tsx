@@ -157,6 +157,7 @@ export const Coffee = (props: CoffeeProps): JSX.Element => {
           backgroundImage: `url(${backgroundCoffee})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundColor: "black",
           height: "100vh",
           width: "100vw",
           fontFamily: "Open Sans, sans-serif",

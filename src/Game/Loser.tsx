@@ -13,6 +13,7 @@ export function Loser(props: LoserProps): JSX.Element {
     <HandleEnter onEnter={onClick}>
       <div
         style={{
+          backgroundColor: "black",
           backgroundImage: `url(${final})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

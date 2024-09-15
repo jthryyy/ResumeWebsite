@@ -131,6 +131,7 @@ export function Resume(props: ResumeProps): JSX.Element {
       {!aboutMe && !science && !office ? (
         <div
           style={{
+            backgroundColor: "black",
             backgroundImage: `url(${resume})`,
             backgroundSize: "cover",
             backgroundPosition: "center",

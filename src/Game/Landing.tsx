@@ -14,6 +14,7 @@ export const Landing = (props: LandingProps): JSX.Element => {
       <div
         className="justify-center"
         style={{
+          backgroundColor: "black",
           backgroundImage: `url(${background})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

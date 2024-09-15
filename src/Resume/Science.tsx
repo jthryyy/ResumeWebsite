@@ -14,6 +14,7 @@ export function Science(props: Props): JSX.Element {
     <>
       <div
         style={{
+          backgroundColor: "black",
           backgroundImage: `url(${sc})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

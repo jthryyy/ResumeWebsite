@@ -14,6 +14,7 @@ export function Office(props: Props): JSX.Element {
     <>
       <div
         style={{
+          backgroundColor: "black",
           backgroundImage: `url(${sw})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

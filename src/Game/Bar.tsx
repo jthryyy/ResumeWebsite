@@ -138,6 +138,7 @@ export const Bar = (props: BarProps): JSX.Element => {
         style={{
           backgroundImage: `url(${background})`,
           backgroundSize: "cover",
+          backgroundColor: "black",
           backgroundPosition: "center",
           height: "100vh",
           width: "100vw",
